@@ -6,33 +6,30 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import rootReducer from './reducers';
 import * as actions from './actions';
 import './App.css';
-import Authorize from './components/Authorize';
+import Authorize from './containers/Authorize';
 import Users from './components/Users';
 
 const store = createStore(rootReducer, {}, install());
 
 class App extends Component {
 
-  componentDidMount() {
-    //const { dispatch, selectedSubreddit } = this.props
+  constructor(props) {
+    super(props);
     store.dispatch(actions.authorizeAuto())
   }
 
   render() {
-    let x = (
+    return (
       <div className="App">
-        {/* <Provider store={store}> */}
+        <Provider store={store}>
           <Router>
             <Route exact path="/auth" component={Authorize} />
             <PrivateRoute exact path="/" component={Users} />
           </Router>
-        {/* </Provider> */}
+        </Provider>
       </div>
     );
-
-    return x;
   }
-
 }
 
 function PrivateRoute({ component: Component, ...rest }) {
@@ -49,7 +46,7 @@ function PrivateRoute({ component: Component, ...rest }) {
             let redir = 
               <Redirect to={{
                   pathname: "/auth", 
-                  //state: { referrer: props.location }
+                  state: { referrer: props.location }
                 }}
               />
 

@@ -38,7 +38,6 @@ function authorize(useImmdiate) {
   };
 
   gapi.auth.authorize(authData, function(response) {
-    let authButton = document.getElementById('auth-button');
     if (response.error) {
       // authButton.hidden = false;
       throw "GAPI - Authorization failed"
@@ -63,10 +62,10 @@ const auth = (state = {authorized: false, authorizing: false}, action) => {
               args: [action.type === actions.AUTHORIZE_AUTO]
             })
         );
-        case actions.authorizationOk:
-          return {...state, authorized: true, authorizing: false};
-        case actions.authorizationFailed:
-          return {...state, authorized: false, authorizing: false};
+      case actions.AUTHORIZATION_OK:
+        return {...state, authorized: true, authorizing: false};
+      case actions.AUTHORIZATION_FAILED:
+        return {...state, authorized: false, authorizing: false};
       default:
         return state
     }
