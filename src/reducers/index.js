@@ -37,15 +37,41 @@ function authorize(useImmdiate) {
     immediate: useImmdiate
   };
 
-  gapi.auth.authorize(authData, function(response) {
+  return gapi.auth.authorize(authData, function(response) {
     if (response.error) {
       // authButton.hidden = false;
-      throw "GAPI - Authorization failed"
+      throw new Error("GAPI - Authorization failed");
     }
     else {
       // authButton.hidden = true;
       // queryAccounts();
+     //gapi.client.init(authData);
     }
+  });
+}
+
+function getAccounts(){
+  return gapi.client.load('analytics', 'v3').then(() => {
+    return gapi.client.analytics.management.accounts.list().then(
+      response => {
+        if (response.result.items && response.result.items.length) {
+          //var firstAccountId = response.result.items[0].id;
+      
+          // response.result.items.forEach(el => {
+          //   var o = document.createElement("option");
+          //   o.value = el.id;
+          //   o.innerText = el.name;
+          //   document.getElementById('accounts').appendChild(o);
+          // });
+          
+          let accs = response.result.items.map(i => ({id: i.id, name: i.name}));
+          return accs;
+
+        } else {
+          console.log('No accounts found for this user.');
+        }
+      }
+    );
   });
 }
 
@@ -63,9 +89,22 @@ const auth = (state = {authorized: false, authorizing: false}, action) => {
             })
         );
       case actions.AUTHORIZATION_OK:
-        return {...state, authorized: true, authorizing: false};
+        return loop(
+          {...state, authorized: true, authorizing: false},
+          Cmd.run( (dispatch) => dispatch(actions.authGetAccounts()), {args: [Cmd.dispatch]})
+        );
       case actions.AUTHORIZATION_FAILED:
         return {...state, authorized: false, authorizing: false};
+      case actions.AUTH_GET_ACCOUNTS:
+        return loop(  
+          {...state},
+          Cmd.run(() => getAccounts(), 
+            {
+              successActionCreator: actions.authReceiveAccounts
+            })
+          );
+      case actions.AUTH_RECEIVE_ACCOUNTS:
+        return {...state, availableAccounts: action.accounts};
       default:
         return state
     }
