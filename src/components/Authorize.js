@@ -1,21 +1,21 @@
 import React from 'react';
 
-function Authorize() {
+function Authorize(props) {
   return (
     <>
-      <button>Log-in</button>
-      <button>Log-out</button>
+      {!props.authorized && <button onClick={props.onLogIn}> Log-in</button>}
+      {props.authorized && <button>Log-out</button>}
       <br/>
 
-      <sapn>Account</sapn>
+      <span>Account</span>
       <select></select>
       <br/>
 
-      <sapn>Propert</sapn>
+      <span>Property</span>
       <select></select>
       <br/>
 
-      <sapn>View</sapn>
+      <span>View</span>
       <select></select>
       <br/>
     </>
