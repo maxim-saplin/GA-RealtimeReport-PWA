@@ -5,17 +5,18 @@ import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import rootReducer from './reducers';
 import * as actions from './actions';
-import './App.css';
 import Authorize from './containers/Authorize';
+import Status from './containers/Status';
 import Users from './components/Users';
 
 const store = createStore(rootReducer, {}, install());
+window.dispatch = store.dispatch;
 
 class App extends Component {
 
   constructor(props) {
     super(props);
-    store.dispatch(actions.authorizeAuto())
+    //store.dispatch(actions.authorizeAuto())
   }
 
   render() {
@@ -26,6 +27,7 @@ class App extends Component {
             <Route exact path="/auth" component={Authorize} />
             <PrivateRoute exact path="/" component={Users} />
           </Router>
+          <Status/>
         </Provider>
       </div>
     );

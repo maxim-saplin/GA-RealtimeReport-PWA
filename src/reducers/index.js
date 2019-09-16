@@ -13,7 +13,7 @@
 //         availableAccounts: []
 //     },
 //     network : {
-//         online: false,
+//         online: true,
 //         lastUpdated: null,
 //         updatePeriodMs: 2000
 //     },
@@ -55,22 +55,42 @@ function getAccounts(){
     return gapi.client.analytics.management.accounts.list().then(
       response => {
         if (response.result.items && response.result.items.length) {
-          //var firstAccountId = response.result.items[0].id;
-      
-          // response.result.items.forEach(el => {
-          //   var o = document.createElement("option");
-          //   o.value = el.id;
-          //   o.innerText = el.name;
-          //   document.getElementById('accounts').appendChild(o);
-          // });
-          
+
           let accs = response.result.items.map(i => ({id: i.id, name: i.name}));
-          return accs;
+          
+          return gapi.client.analytics.management.webproperties.list(
+            {"accountId": "~all"})
+          .then(
+            response => {
+              if (response.result.items && response.result.items.length) {
+                accs.forEach(a => {
+                  a.poperties = response.result.items.filter(p => p.accountId === a.id).map(p => ({id: p.id, name: p.name}));
+                });
+
+                return gapi.client.analytics.management.profiles.list({
+                    "accountId": "~all",
+                    "webPropertyId": "~all"
+                  })
+                  .then(
+                    response => {
+                      if (response.result.items && response.result.items.length) {
+                        accs.forEach(a => {
+                          a.poperties.forEach(p => {
+                            p.views = response.result.items.filter(v => v.webPropertyId === p.id).map(v => ({id: v.id, name: v.name}));
+                          });
+                        });
+
+                        return accs;
+                      }  
+                    });
+              }
+            }
+          );
 
         } else {
           console.log('No accounts found for this user.');
         }
-      }
+     }
     );
   });
 }
@@ -88,26 +108,44 @@ const auth = (state = {authorized: false, authorizing: false}, action) => {
               args: [action.type === actions.AUTHORIZE_AUTO]
             })
         );
+
       case actions.AUTHORIZATION_OK:
         return loop(
           {...state, authorized: true, authorizing: false},
           Cmd.run( (dispatch) => dispatch(actions.authGetAccounts()), {args: [Cmd.dispatch]})
         );
+
       case actions.AUTHORIZATION_FAILED:
         return {...state, authorized: false, authorizing: false};
+
+      case actions.AUTHORIZE_SINGOUT:
+          return loop(
+            {...state, authorized: false, authorizing: false},
+            Cmd.run( () => {gapi.auth.setToken(null); gapi.auth.signOut()})
+          );
+
       case actions.AUTH_GET_ACCOUNTS:
         return loop(  
-          {...state},
+          state,
           Cmd.run(() => getAccounts(), 
             {
               successActionCreator: actions.authReceiveAccounts
             })
           );
+
       case actions.AUTH_RECEIVE_ACCOUNTS:
         return {...state, availableAccounts: action.accounts};
+
       default:
         return state
     }
-  }
+}
 
-export default combineReducers({auth});
+const network = (state = {online: true}, action) => {
+  switch (action.type) {
+    default:
+        return state
+  }
+}
+
+export default combineReducers({auth, network});

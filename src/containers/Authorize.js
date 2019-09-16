@@ -10,8 +10,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onLogIn: () => {
+    onSignIn: () => {
       dispatch(actions.authorizeManual())
+    },
+    onSignOut: () => {
+      dispatch(actions.authorizeSingout())
     }
   }
 }

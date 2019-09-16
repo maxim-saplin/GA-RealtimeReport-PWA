@@ -1,17 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import * as actions from './actions';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-// Wait for GAPI
-window.gapi.load("auth", () => {
-    ReactDOM.render(<App />, document.getElementById('root'));
-});
+ReactDOM.render(<App />, document.getElementById('root'));
 
-// window.startReact = () => {
-//     ReactDOM.render(<App />, document.getElementById('root'));
-// };
+window.gapi.load("auth", () => {
+    window.dispatch(actions.authorizeAuto());
+});
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -3,8 +3,8 @@ import React from 'react';
 function Authorize(props) {
   return (
     <>
-      {!props.authorized && <button onClick={props.onLogIn}> Log-in</button>}
-      {props.authorized && <button>Log-out</button>}
+      {!props.authorized && <button onClick={props.onSignIn}>Sign in</button>}
+      {props.authorized && <button onClick={props.onSignOut}>Sign out</button>}
       <br/>
 
       <span>Account</span>

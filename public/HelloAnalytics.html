@@ -62,7 +62,6 @@
     });
   }
 
-
 function queryAccounts() {
   // Load the Google Analytics client library.
   gapi.client.load('analytics', 'v3').then(function() {
@@ -71,7 +70,6 @@ function queryAccounts() {
     gapi.client.analytics.management.accounts.list().then(handleAccounts);
   });
 }
-
 
 function handleAccounts(response) {
   // Handles the response from the accounts list method.
@@ -92,7 +90,6 @@ function handleAccounts(response) {
     console.log('No accounts found for this user.');
   }
 }
-
 
 function queryProperties(accountId) {
   // Get a list of all the properties for the account.
