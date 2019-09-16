@@ -106,12 +106,11 @@ function queryProperties(accountId) {
 function handleProperties(response) {
   // Handles the response from the webproperties list method.
   if (response.result.items && response.result.items.length) {
-
+    document.getElementById('properties').innerHTML = '';
     response.result.items.forEach(el => {
       var o = document.createElement("option");
       o.value = el.id;
       o.innerText = el.name;
-      document.getElementById('properties').innerHTML = '';
       document.getElementById('properties').appendChild(o);
     });
 
@@ -147,12 +146,11 @@ function queryProfiles(accountId, propertyId) {
 function handleProfiles(response) {
   // Handles the response from the profiles list method.
   if (response.result.items && response.result.items.length) {
-    
+    document.getElementById('views').innerHTML = '';
     response.result.items.forEach(el => {
       var o = document.createElement("option");
       o.value = el.id;
       o.innerText = el.name;
-      document.getElementById('views').innerHTML = '';
       document.getElementById('views').appendChild(o);
     });
     

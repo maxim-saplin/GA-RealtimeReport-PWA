@@ -1,23 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
+import AccountSelection from './AccountSelection'
 
-function Authorize(props) {
+function Authorize({authorized, onSignIn, onSignOut, onAccountChoice, availableAccounts, currentAccount}) {
+  const [tempCurrAccount, setTempCurrAccount] = useState(currentAccount ? currentAccount : null);
+  
   return (
     <>
-      {!props.authorized && <button onClick={props.onSignIn}>Sign in</button>}
-      {props.authorized && <button onClick={props.onSignOut}>Sign out</button>}
+      {!authorized && <button onClick={onSignIn}>Sign in</button>}
+      {authorized && <button onClick={onSignOut}>Sign out</button>}
+      {authorized && <button onClick={onAccountChoice(tempCurrAccount)}>Proceed -></button>}
       <br/>
 
-      <span>Account</span>
-      <select></select>
-      <br/>
-
-      <span>Property</span>
-      <select></select>
-      <br/>
-
-      <span>View</span>
-      <select></select>
-      <br/>
+      <AccountSelection availableAccounts={availableAccounts} currentAccount={tempCurrAccount} onChange={(val) => setTempCurrAccount(val)}/>
+ 
     </>
   );
 }

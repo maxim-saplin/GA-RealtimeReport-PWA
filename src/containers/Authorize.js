@@ -15,6 +15,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     onSignOut: () => {
       dispatch(actions.authorizeSingout())
+    },
+    onAccountChoice: (account) => {
+      dispatch(actions.authChooseAccount(account))
     }
   }
 }

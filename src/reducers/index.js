@@ -5,10 +5,9 @@
 //         authorizing: false,
 //         currentAccount:
 //         {
-//             authorized: false,
-//             account: "",
-//             property: "",
-//             view: ""
+//             accountId: "",
+//             propertyId: "",
+//             viewId: ""
 //         },
 //         availableAccounts: []
 //     },
@@ -64,7 +63,7 @@ function getAccounts(){
             response => {
               if (response.result.items && response.result.items.length) {
                 accs.forEach(a => {
-                  a.poperties = response.result.items.filter(p => p.accountId === a.id).map(p => ({id: p.id, name: p.name}));
+                  a.properties = response.result.items.filter(p => p.accountId === a.id).map(p => ({id: p.id, name: p.name}));
                 });
 
                 return gapi.client.analytics.management.profiles.list({
@@ -75,7 +74,7 @@ function getAccounts(){
                     response => {
                       if (response.result.items && response.result.items.length) {
                         accs.forEach(a => {
-                          a.poperties.forEach(p => {
+                          a.properties.forEach(p => {
                             p.views = response.result.items.filter(v => v.webPropertyId === p.id).map(v => ({id: v.id, name: v.name}));
                           });
                         });
