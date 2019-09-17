@@ -8,7 +8,15 @@ import * as serviceWorker from './serviceWorker';
 ReactDOM.render(<App />, document.getElementById('root'));
 
 window.gapi.load("auth", () => {
-    window.dispatch(actions.authorizeAuto());
+  window.dispatch(actions.authorizeAuto());
+});
+
+window.addEventListener("online", () => {
+    window.dispatch(actions.networkOnline());
+});
+
+window.addEventListener("offline", () => {
+    window.dispatch(actions.networkOffline());
 });
 
 // If you want your app to work offline and load faster, you can change

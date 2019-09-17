@@ -1,11 +1,11 @@
 import React from 'react';
 
-function Status({online, authorized, selectedAccount}) {
+function Status({online, authorized, currentAccount}) {
   return (
     <>
       {online ? "Online; " : "Offline;"}
       {authorized ? "Authorized; " : "Not Authorizded;"}
-      {selectedAccount ? "GA Selected; " : "GA Not Selected;"}
+      {currentAccount ? "GA Selected; " : "GA Not Selected;"}
     </>
   );
 }

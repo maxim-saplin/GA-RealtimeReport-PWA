@@ -5,7 +5,7 @@ const mapStateToProps = (state) => {
   return {
     online: state.network.online,
     authorized: state.auth.authorized,
-    selectedAccount: state.auth.current
+    currentAccount: state.auth.currentAccount
   }
 }
 

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-function AccountSelection({ availableAccounts, currentAccount, onChange}) {
+function Authorize({availableAccounts, currentAccount, onAccountChoice}) {
   
   function getItemById(list, id){
     for (let i of list)
@@ -27,7 +27,7 @@ function AccountSelection({ availableAccounts, currentAccount, onChange}) {
         viewId = vw.id;
       }
     }
-    onChange({accountId, propertyId, viewId});
+    onAccountChoice({accountId, propertyId, viewId});
   }
   
   let account = accountId ? getItemById(availableAccounts, accountId) : null;
@@ -37,20 +37,20 @@ function AccountSelection({ availableAccounts, currentAccount, onChange}) {
   // Changed account, reset propertyID to the first one
   if (account && !property) {
     if (account.properties && account.properties.length > 0) {
-      onChange({accountId, propertyId: account.properties[0].id, viewId})
+      onAccountChoice({accountId, propertyId: account.properties[0].id, viewId})
     }
   }
 
   if (property && !view) {
     if (property.views && property.views.length > 0) {
-      onChange({accountId, propertyId, viewId: property.views[0].id})
+      onAccountChoice({accountId, propertyId, viewId: property.views[0].id})
     }
   }
   
   return (
     <>
       <span>Account</span>
-      <select onChange={(e) => onChange({accountId: e.target.value, propertyId, viewId}) } 
+      <select onChange={(e) => onAccountChoice({accountId: e.target.value, propertyId, viewId}) } 
         value={accountId ? accountId : ""}>
       {
         account 
@@ -60,7 +60,7 @@ function AccountSelection({ availableAccounts, currentAccount, onChange}) {
       <br/>
       
       <span>Property</span>
-      <select onChange={(e) => onChange({accountId, propertyId: e.target.value, viewId}) } 
+      <select onChange={(e) => onAccountChoice({accountId, propertyId: e.target.value, viewId}) } 
         value={propertyId ? propertyId : ""}>
       {
         property 
@@ -70,7 +70,7 @@ function AccountSelection({ availableAccounts, currentAccount, onChange}) {
       <br/>
 
       <span>View</span>
-      <select onChange={(e) => onChange({accountId, propertyId, viewId: e.target.value}) } 
+      <select onChange={(e) => onAccountChoice({accountId, propertyId, viewId: e.target.value}) } 
         value={viewId ? viewId : ""}>
       {
         view 
@@ -82,4 +82,4 @@ function AccountSelection({ availableAccounts, currentAccount, onChange}) {
   );
 }
 
-export default AccountSelection;
+export default Authorize;
