@@ -8,7 +8,7 @@ import rootReducer from './reducers';
 import AccountSelection from './containers/AccountSelection';
 import Navigation from './containers/Navigation';
 import Status from './containers/Status';
-import Users from './components/Users';
+import Users from './containers/Users';
 
 const store = createStore(rootReducer, {}, install());
 window.dispatch = store.dispatch;

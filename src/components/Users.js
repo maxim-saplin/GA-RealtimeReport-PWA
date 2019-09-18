@@ -1,11 +1,11 @@
 import React from 'react';
 
-function Users({now}) {
+function Users({usersNow}) {
   return (
-    <>
+    <div>
       <h1>Users NOW:</h1>
-      {now}
-    </>
+      <h1>{usersNow}</h1>
+    </div>
   );
 }
 

@@ -1,12 +1,12 @@
-import { loop, Cmd, combineReducers } from 'redux-loop';
+import { loop, Cmd } from 'redux-loop';
 import * as actions from '../actions';
 
-let CLIENT_ID = '48841825057-engcdce3j4sfo5j5v4pc3hrpe9fgv1mu.apps.googleusercontent.com';
-let SCOPES = ['https://www.googleapis.com/auth/analytics.readonly'];
-let gapi = window.gapi;
+const CLIENT_ID = '48841825057-engcdce3j4sfo5j5v4pc3hrpe9fgv1mu.apps.googleusercontent.com';
+const SCOPES = ['https://www.googleapis.com/auth/analytics.readonly'];
+const gapi = window.gapi;
 
 function authorize(useImmdiate) {
-  let authData = {
+  const authData = {
     client_id: CLIENT_ID,
     scope: SCOPES,
     immediate: useImmdiate
@@ -82,7 +82,8 @@ const auth = (state = {authorized: false, authorizing: false}, action) => {
       case actions.AUTHORIZATION_OK:
         return loop(
           {...state, authorized: true, authorizing: false},
-          Cmd.run( (dispatch) => dispatch(actions.authGetAccounts()), {args: [Cmd.dispatch]})
+          Cmd.action({type: actions.AUTH_GET_ACCOUNTS})
+          //Cmd.run( (dispatch) => dispatch(actions.authGetAccounts()), {args: [Cmd.dispatch]})
         );
 
       case actions.AUTHORIZATION_FAILED:
@@ -107,7 +108,10 @@ const auth = (state = {authorized: false, authorizing: false}, action) => {
         return {...state, availableAccounts: action.accounts};
 
       case actions.AUTH_CHOOSE_ACCOUNT:
-          return {...state, currentAccount: action.account};
+        return loop(
+          {...state, currentAccount: action.account},
+          Cmd.action({type: actions.GA_GET_RT_DATA, viewId: action.account.viewId})
+        );
 
       default:
         return state
