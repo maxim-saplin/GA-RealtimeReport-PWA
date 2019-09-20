@@ -64,6 +64,8 @@ function getAccounts(){
   });
 }
 
+let prevViewId;
+
 const auth = (state = {authorized: false, authorizing: false}, action) => {
     switch (action.type) {
 
@@ -108,10 +110,18 @@ const auth = (state = {authorized: false, authorizing: false}, action) => {
         return {...state, availableAccounts: action.accounts};
 
       case actions.AUTH_CHOOSE_ACCOUNT:
-        return loop(
-          {...state, currentAccount: action.account},
-          Cmd.action({type: actions.GA_GET_RT_DATA, viewId: action.account.viewId})
-        );
+        let flag = false;  
+        if (action.account.viewId && prevViewId !== action.account.viewId) {
+          flag = true;
+          prevViewId = action.account.viewId;
+        }
+        if (flag){
+          return loop(
+            {...state, currentAccount: action.account},
+            Cmd.action({type: actions.GA_GET_RT_DATA, viewId: action.account.viewId})
+          );
+        }
+        return {...state, currentAccount: action.account};
 
       default:
         return state

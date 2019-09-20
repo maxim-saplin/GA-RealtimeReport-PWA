@@ -19,6 +19,7 @@
 //     },
 //     gaData: {
 //         usersNow: 0,
+//         countries: []
 //         usersToday: 0
 //         fetching: false
 //     }
