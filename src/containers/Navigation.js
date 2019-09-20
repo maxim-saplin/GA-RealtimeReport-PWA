@@ -8,12 +8,12 @@ function Navigation ({authorized, onSignIn, onSignOut, history}) {
   } 
   
   return (
-    <div>
+    <div id="navigation">
       {!authorized && <button onClick={onSignIn}>Sign in</button>}
       {authorized && history.location.pathname === "/auth" && <button onClick={onSignOut}>Sign out</button>}
       {authorized && history.location.pathname === "/auth" && <button onClick={() => history.push("/")}>Proceed</button>}
       {authorized && history.location.pathname !== "/auth" && <button onClick={() => history.push("/auth")}>Switch Account</button>}
-  </div>)
+    </div>)
 }
 
 const mapStateToProps = (state) => {

@@ -48,8 +48,9 @@ function Authorize({availableAccounts, currentAccount, onAccountChoice}) {
   }
   
   return (
-    <>
+    <div id="account">
       <span>Account</span>
+      <br/>
       <select onChange={(e) => onAccountChoice({accountId: e.target.value, propertyId, viewId}) } 
         value={accountId ? accountId : ""}>
       {
@@ -60,6 +61,7 @@ function Authorize({availableAccounts, currentAccount, onAccountChoice}) {
       <br/>
       
       <span>Property</span>
+      <br/>
       <select onChange={(e) => onAccountChoice({accountId, propertyId: e.target.value, viewId}) } 
         value={propertyId ? propertyId : ""}>
       {
@@ -70,6 +72,7 @@ function Authorize({availableAccounts, currentAccount, onAccountChoice}) {
       <br/>
 
       <span>View</span>
+      <br/>
       <select onChange={(e) => onAccountChoice({accountId, propertyId, viewId: e.target.value}) } 
         value={viewId ? viewId : ""}>
       {
@@ -78,7 +81,7 @@ function Authorize({availableAccounts, currentAccount, onAccountChoice}) {
       }
       </select>
       <br/>
-    </>
+    </div>
   );
 }
 
