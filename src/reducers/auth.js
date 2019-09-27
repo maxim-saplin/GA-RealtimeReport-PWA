@@ -118,7 +118,7 @@ const auth = (state = {authorized: false, authorizing: false}, action) => {
         if (flag){
           return loop(
             {...state, currentAccount: action.account},
-            Cmd.action({type: actions.GA_GET_RT_DATA, viewId: action.account.viewId})
+            Cmd.action({type: actions.GA_GET_ALL_DATA, viewId: action.account.viewId})
           );
         }
         return {...state, currentAccount: action.account};
