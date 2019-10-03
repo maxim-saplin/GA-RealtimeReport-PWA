@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 function Authorize({availableAccounts, currentAccount, onAccountChoice}) {
   
   function getItemById(list, id){
-    for (let i of list)
+    for (var i of list)
       if (i.id === id) return i;
     return null;
   }

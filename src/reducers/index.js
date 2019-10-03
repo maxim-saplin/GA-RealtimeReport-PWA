@@ -25,7 +25,7 @@
 //     }
 // }
 
-import { loop, Cmd, combineReducers } from 'redux-loop';
+import {combineReducers } from 'redux-loop';
 import auth from './auth';
 import network from './network';
 import gaData from './gaData';

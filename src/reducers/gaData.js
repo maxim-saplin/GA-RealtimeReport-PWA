@@ -57,7 +57,7 @@ const gaData = (state = {usersNow: 0, usersToday: 0}, action) => {
       );
     case actions.GA_RECEIVE_RT_DATA:
         return loop(
-          {... state, fetching: false, usersNow: action.data.usersNow, countriesAndUsersNow: action.data.countriesAndUsersNow},
+          {...state, fetching: false, usersNow: action.data.usersNow, countriesAndUsersNow: action.data.countriesAndUsersNow},
           Cmd.run( 
             (dispatch, viewId) => {timeoutRt = setTimeout(() => dispatch(actions.gaGetRtData(viewId)), rtRefreshMs)}, 
             {args: [Cmd.dispatch, action.viewId]}) 
@@ -74,7 +74,7 @@ const gaData = (state = {usersNow: 0, usersToday: 0}, action) => {
       );
     case actions.GA_RECEIVE_DATA:
         return loop(
-          {... state, fetching: false, usersToday: action.data.usersToday, countriesAndUsersToday: action.data.countriesAndUsersToday},
+          {...state, fetching: false, usersToday: action.data.usersToday, countriesAndUsersToday: action.data.countriesAndUsersToday},
           Cmd.run( 
             (dispatch, viewId) => {timeout = setTimeout(() => dispatch(actions.gaGetData(viewId)), refreshMs)}, 
             {args: [Cmd.dispatch, action.viewId]}) 
