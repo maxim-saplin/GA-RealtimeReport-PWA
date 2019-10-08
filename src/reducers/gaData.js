@@ -16,6 +16,11 @@ function getRtData(viewId){
   .then(function(response) {
     return {data: {usersNow: response.result.totalsForAllResults["rt:activeUsers"], countriesAndUsersNow: response.result.rows}, viewId};
   })
+  .catch(function (error) { 
+    if (error.status === 401) return {reAuth: true, viewId}; // indicate that auth refresh is required
+
+    console.log("GA RT error: "+error.status);
+  });
 }
 
 function getData(viewId){
@@ -31,11 +36,29 @@ function getData(viewId){
   .then(function(response) {
     return {data: {usersToday: response.result.totalsForAllResults["ga:users"], countriesAndUsersToday: response.result.rows}, viewId};
   })
+  .catch(function (error) {
+    if (error.status === 401) return {reAuth: true, viewId}; // indicate that auth refresh is required
+    
+    console.log("GA error: "+error.status);
+  });
 }
 
 let timeoutRt, timeout;
 
 const gaData = (state = {usersNow: 0, usersToday: 0}, action) => {
+
+  //GA fetch returned authorization error, might be an issue with auth token being invalidated. Repeat autherization and restart data fetching
+  if (action.type === actions.GA_RECEIVE_RT_DATA || action.type === actions.GA_RECEIVE_DATA) {
+    if (action.reAuth && action.reAuth === true){
+      return loop(
+        {...state, fetching: false},
+        Cmd.list([
+          Cmd.action({type: actions.AUTHORIZE_REFRESH_TOKEN, viewId: action.viewId})
+        ])
+      );    
+    }
+  }
+  
   switch (action.type) {
     case actions.GA_GET_ALL_DATA:
         return loop(
@@ -56,7 +79,7 @@ const gaData = (state = {usersNow: 0, usersToday: 0}, action) => {
           })
       );
     case actions.GA_RECEIVE_RT_DATA:
-        return loop(
+         return loop(
           {...state, fetching: false, usersNow: action.data.usersNow, countriesAndUsersNow: action.data.countriesAndUsersNow},
           Cmd.run( 
             (dispatch, viewId) => {timeoutRt = setTimeout(() => dispatch(actions.gaGetRtData(viewId)), rtRefreshMs)}, 

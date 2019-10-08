@@ -68,6 +68,15 @@ let prevViewId;
 
 const auth = (state = {authorized: false, authorizing: false}, action) => {
     switch (action.type) {
+      case actions.AUTHORIZE_REFRESH_TOKEN:
+        return loop(
+            state,
+            Cmd.run(() => authorize(true),
+            {
+              successActionCreator: () => actions.gaGetAllData(action.viewId)
+            }
+          )
+        );
 
       case actions.AUTHORIZE_AUTO:
       case actions.AUTHORIZE_MANUAL:
@@ -85,7 +94,6 @@ const auth = (state = {authorized: false, authorizing: false}, action) => {
         return loop(
           {...state, authorized: true, authorizing: false},
           Cmd.action({type: actions.AUTH_GET_ACCOUNTS})
-          //Cmd.run( (dispatch) => dispatch(actions.authGetAccounts()), {args: [Cmd.dispatch]})
         );
 
       case actions.AUTHORIZATION_FAILED:
