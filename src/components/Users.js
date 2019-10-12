@@ -7,7 +7,7 @@ function Users({users, countriesAndUsers, title}) {
         <h1>{users}</h1>
         {
           countriesAndUsers && countriesAndUsers.length > 0 &&
-          countriesAndUsers.map(i => <><span key={i[0]}>{i[0]}:</span><span class="right">{i[1]}</span><br/></>)
+          countriesAndUsers.map(i => <><span key={i[0]}>{i[0]}</span><span class="right">{i[1]}</span><br/></>)
         }
     </div>
   );

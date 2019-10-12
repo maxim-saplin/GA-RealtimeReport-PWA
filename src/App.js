@@ -21,8 +21,10 @@ export default function App() {
         <Router>
           <Route component={Navigation}/>
           <Route exact path="/auth" component={AccountSelection} />
-          <ConditionalRoute exact path="/" component={UsersNow} conditionEval={() => store.getState().auth.authorized} />
-          <ConditionalRoute exact path="/" component={UsersToday} conditionEval={() => store.getState().auth.authorized} />
+          <div id="columns">
+            <ConditionalRoute exact path="/" component={UsersNow} conditionEval={() => store.getState().auth.authorized} />
+            <ConditionalRoute exact path="/" component={UsersToday} conditionEval={() => store.getState().auth.authorized} />
+          </div>
         </Router>
         <Status />
       </Provider>
