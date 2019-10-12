@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/GA-RealtimeReport-PWA/static/css/main.8b687e4b.chunk.css",
+    "main.js": "/GA-RealtimeReport-PWA/static/js/main.39517425.chunk.js",
+    "main.js.map": "/GA-RealtimeReport-PWA/static/js/main.39517425.chunk.js.map",
+    "runtime~main.js": "/GA-RealtimeReport-PWA/static/js/runtime~main.844f3ebc.js",
+    "runtime~main.js.map": "/GA-RealtimeReport-PWA/static/js/runtime~main.844f3ebc.js.map",
+    "static/js/2.f2d72b11.chunk.js": "/GA-RealtimeReport-PWA/static/js/2.f2d72b11.chunk.js",
+    "static/js/2.f2d72b11.chunk.js.map": "/GA-RealtimeReport-PWA/static/js/2.f2d72b11.chunk.js.map",
+    "index.html": "/GA-RealtimeReport-PWA/index.html",
+    "precache-manifest.0215436384611d0550e7c7c5afad3b5d.js": "/GA-RealtimeReport-PWA/precache-manifest.0215436384611d0550e7c7c5afad3b5d.js",
+    "service-worker.js": "/GA-RealtimeReport-PWA/service-worker.js",
+    "static/css/main.8b687e4b.chunk.css.map": "/GA-RealtimeReport-PWA/static/css/main.8b687e4b.chunk.css.map",
+    "static/media/index.css": "/GA-RealtimeReport-PWA/static/media/bg.285fa153.png"
+  }
+}
