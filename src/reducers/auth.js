@@ -19,7 +19,6 @@ function authorize(useImmdiate) {
 }
 
 function getAccounts(){
-  return window.gapi.client.load('analytics', 'v3').then(() => {
     return window.gapi.client.analytics.management.accounts.list().then(
       response => {
         if (response.result.items && response.result.items.length) {
@@ -60,7 +59,6 @@ function getAccounts(){
         }
      }
     );
-  });
 }
 
 let prevViewId;
@@ -114,7 +112,14 @@ const auth = (state = {authorized: false, authorizing: false}, action) => {
           );
 
       case actions.AUTH_RECEIVE_ACCOUNTS:
-        return {...state, availableAccounts: action.accounts};
+        let proceedActions = [];
+        //TODO: check if currentAccount is among available accounts. If not - set current account to unset
+        if (state.currentAccount) proceedActions.push(Cmd.action({type: actions.GA_GET_ALL_DATA, viewId: state.currentAccount.viewId}));
+
+        return loop(
+          {...state, availableAccounts: action.accounts},
+          Cmd.list(proceedActions)
+        );
 
       case actions.AUTH_CHOOSE_ACCOUNT:
         let flag = false;  
@@ -125,7 +130,10 @@ const auth = (state = {authorized: false, authorizing: false}, action) => {
         if (flag){
           return loop(
             {...state, currentAccount: action.account},
-            Cmd.action({type: actions.GA_GET_ALL_DATA, viewId: action.account.viewId})
+            Cmd.list([
+              Cmd.action({type: actions.GA_GET_ALL_DATA, viewId: action.account.viewId}),
+              Cmd.action({type: actions.SERVICE_PERSIST_STATE}),
+            ])
           );
         }
         return {...state, currentAccount: action.account};

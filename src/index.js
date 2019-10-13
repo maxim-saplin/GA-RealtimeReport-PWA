@@ -1,9 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore } from 'redux'
+import { install } from 'redux-loop';
 import * as actions from './actions';
+import rootReducer from './reducers';
 import './styles/index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+
+window.store = createStore(rootReducer, {}, install());
+window.dispatch = window.store.dispatch;
+window.store.dispatch(actions.serviceLoadState());
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
@@ -13,15 +20,15 @@ function loadGapi() {
   let script = document.createElement('script');
   script.onload = function () {
     window.gapi.load("auth", () => {
-      gapiLoaded = true;
-      window.dispatch(actions.authorizeAuto());
+      window.gapi.client.load('analytics', 'v3').then(() => {
+        gapiLoaded = true;
+        window.dispatch(actions.authorizeAuto());
+      });
     });
   };
   script.src = "https://apis.google.com/js/client.js";
   document.head.appendChild(script);
 }
-
-//if (window.gapi && window.gapi.load) loadGapi();
 
 loadGapi();
 

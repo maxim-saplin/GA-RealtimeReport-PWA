@@ -21,7 +21,7 @@ body {
 select, option, input, button {
   font-family: monospace;
   color: black;
-  background-color: mediumaquamarine;
+  background-color: #80cbc4;
   border: none;
   padding: 2px;
   -webkit-appearance: none;
@@ -34,7 +34,7 @@ button {
 }
 
 h1, h2 {
-  color: MediumAquaMarine;
+  color: #80cbc4;
   margin: 0;
 }
 

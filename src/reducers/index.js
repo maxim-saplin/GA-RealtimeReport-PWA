@@ -13,9 +13,7 @@
 //         availableAccounts: []
 //     },
 //     network : {
-//         online: true,
-//         lastUpdated: null,
-//         updatePeriodMs: 2000
+//         online: true
 //     },
 //     gaData: {
 //         usersNow: 0,
@@ -25,10 +23,10 @@
 //     }
 // }
 
-import {combineReducers } from 'redux-loop';
+import {combineReducers, reduceReducers} from 'redux-loop';
 import auth from './auth';
 import network from './network';
 import gaData from './gaData';
+import service from './service';
 
-
-export default combineReducers({auth, gaData, network});
+export default reduceReducers(service, combineReducers({auth, gaData, network}));
