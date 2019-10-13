@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/GA-RealtimeReport-PWA/precache-manifest.03d7aaaeef48a6dc89d8b8734c3c9a8e.js"
+  "/GA-RealtimeReport-PWA/precache-manifest.1cfa6e4062d318f72c32d44f961fdf2a.js"
 );
 
 self.addEventListener('message', (event) => {
