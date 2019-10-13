@@ -1,13 +1,11 @@
 import { loop, Cmd } from 'redux-loop';
 import * as actions from '../actions';
 
-const gapi = window.gapi;
-
 const rtRefreshMs = 3000;
 const refreshMs = 12000;
 
 function getRtData(viewId){
-  return gapi.client.analytics.data.realtime.get({
+  return window.gapi.client.analytics.data.realtime.get({
     "ids": "ga:" + viewId,
     "metrics": "rt:activeUsers",
     "dimensions": "rt:country",
@@ -24,7 +22,7 @@ function getRtData(viewId){
 }
 
 function getData(viewId){
-  return gapi.client.analytics.data.ga.get({
+  return window.gapi.client.analytics.data.ga.get({
     "ids": "ga:" + viewId,
     "start-date": "today",
     "end-date": "today",

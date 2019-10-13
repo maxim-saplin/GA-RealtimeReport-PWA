@@ -3,7 +3,6 @@ import * as actions from '../actions';
 
 const CLIENT_ID = '48841825057-engcdce3j4sfo5j5v4pc3hrpe9fgv1mu.apps.googleusercontent.com';
 const SCOPES = ['https://www.googleapis.com/auth/analytics.readonly'];
-const gapi = window.gapi;
 
 function authorize(useImmdiate) {
   const authData = {
@@ -12,22 +11,22 @@ function authorize(useImmdiate) {
     immediate: useImmdiate
   };
 
-  return gapi.auth.authorize(authData, function(response) {
+  return window.gapi.auth.authorize(authData, function(response) {
     if (response.error) {
-      throw new Error("GAPI - Authorization failed");
+      throw new Error("window.gapi - Authorization failed");
     }
   });
 }
 
 function getAccounts(){
-  return gapi.client.load('analytics', 'v3').then(() => {
-    return gapi.client.analytics.management.accounts.list().then(
+  return window.gapi.client.load('analytics', 'v3').then(() => {
+    return window.gapi.client.analytics.management.accounts.list().then(
       response => {
         if (response.result.items && response.result.items.length) {
 
           let accs = response.result.items.map(i => ({id: i.id, name: i.name}));
           
-          return gapi.client.analytics.management.webproperties.list(
+          return window.gapi.client.analytics.management.webproperties.list(
             {"accountId": "~all"})
           .then(
             response => {
@@ -36,7 +35,7 @@ function getAccounts(){
                   a.properties = response.result.items.filter(p => p.accountId === a.id).map(p => ({id: p.id, name: p.name}));
                 });
 
-                return gapi.client.analytics.management.profiles.list({
+                return window.gapi.client.analytics.management.profiles.list({
                     "accountId": "~all",
                     "webPropertyId": "~all"
                   })
@@ -102,7 +101,7 @@ const auth = (state = {authorized: false, authorizing: false}, action) => {
       case actions.AUTHORIZE_SINGOUT:
           return loop(
             {...state, authorized: false, authorizing: false},
-            Cmd.run( () => {gapi.auth.setToken(null); gapi.auth.signOut()})
+            Cmd.run( () => {window.gapi.auth.setToken(null); window.gapi.auth.signOut()})
           );
 
       case actions.AUTH_GET_ACCOUNTS:

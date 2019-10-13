@@ -11,7 +11,7 @@ function resumeGaDataRetrieval(dispatch, getState){
   }
 }
 
-const network = (state = {online: true}, action) => {
+const network = (state = {online: navigator.onLine}, action) => {
   switch (action.type) {
     case actions.NETWORK_ONLINE:
         return loop(

@@ -7,16 +7,31 @@ import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
-window.gapi.load("auth", () => {
-  window.dispatch(actions.authorizeAuto());
-});
+let gapiLoaded = false;
+
+function loadGapi() {
+  let script = document.createElement('script');
+  script.onload = function () {
+    window.gapi.load("auth", () => {
+      gapiLoaded = true;
+      window.dispatch(actions.authorizeAuto());
+    });
+  };
+  script.src = "https://apis.google.com/js/client.js";
+  document.head.appendChild(script);
+}
+
+//if (window.gapi && window.gapi.load) loadGapi();
+
+loadGapi();
 
 window.addEventListener("online", () => {
-    window.dispatch(actions.networkOnline());
+  if (!gapiLoaded) loadGapi();
+  window.dispatch(actions.networkOnline());
 });
 
 window.addEventListener("offline", () => {
-    window.dispatch(actions.networkOffline());
+  window.dispatch(actions.networkOffline());
 });
 
 // If you want your app to work offline and load faster, you can change

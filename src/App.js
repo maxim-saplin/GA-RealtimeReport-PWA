@@ -14,11 +14,18 @@ import UsersToday from './containers/UsersToday';
 const store = createStore(rootReducer, {}, install());
 window.dispatch = store.dispatch;
 
+let basename = "/";
+
+ if (process.env.PUBLIC_URL) {
+  const publicUrl = new URL(process.env.PUBLIC_URL, "/");
+  basename = publicUrl.pathname;
+}
+
 export default function App() {
   return (
     <div className="App">
       <Provider store={store}>
-        <Router basename="/GA-RealtimeReport-PWA">
+        <Router basename={basename}>
           <Route component={Navigation}/>
           <Route exact path="/auth" component={AccountSelection} />
           <div id="columns">
