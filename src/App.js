@@ -11,8 +11,7 @@ import UsersToday from './containers/UsersToday';
 let basename = "/";
 
 if (process.env.PUBLIC_URL) {
-  const publicUrl = new URL(process.env.PUBLIC_URL, "/");
-  basename = publicUrl.pathname;
+  basename = process.env.PUBLIC_URL;
 }
 
 export default function App() {
