@@ -18,7 +18,7 @@ export default function App() {
   return (
     <div className="App">
       <Provider store={store}>
-        <Router>
+        <Router basename="/GA-RealtimeReport-PWA">
           <Route component={Navigation}/>
           <Route exact path="/auth" component={AccountSelection} />
           <div id="columns">
