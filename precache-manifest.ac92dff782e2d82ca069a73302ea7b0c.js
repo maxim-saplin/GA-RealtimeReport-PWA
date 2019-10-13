@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3fc48e264a6af3263352f937f82e7640",
+    "revision": "6d6513f1b92fe45d722e3294b4b22d77",
     "url": "/GA-RealtimeReport-PWA/index.html"
   },
   {
-    "revision": "258e49b2e8081b9bd62f",
+    "revision": "2f7dd18b12190c80ee33",
     "url": "/GA-RealtimeReport-PWA/static/css/main.d7ec9faf.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/GA-RealtimeReport-PWA/static/js/2.7828e35e.chunk.js"
   },
   {
-    "revision": "258e49b2e8081b9bd62f",
-    "url": "/GA-RealtimeReport-PWA/static/js/main.9ceadc0d.chunk.js"
+    "revision": "2f7dd18b12190c80ee33",
+    "url": "/GA-RealtimeReport-PWA/static/js/main.f8630831.chunk.js"
   },
   {
     "revision": "e383f3d195d67173906f",
