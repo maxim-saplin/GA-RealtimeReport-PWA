@@ -6,9 +6,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: white;
   background-color: black;
-  background-image: url(bg.png);
-  background-repeat: repeat;
-  background-size: 480px 800px;
   padding: 10px;
 }
 
@@ -18,12 +15,16 @@ body {
   margin-right: auto;
 }
 
+#navigation{
+    padding: 4px;
+}
+
 select, option, input, button {
   font-family: monospace;
   color: black;
-  background-color: #80cbc4;
+  background-color: #5d948f;
   border: none;
-  padding: 2px;
+  padding: 4px;
   -webkit-appearance: none;
   -webkit-border-radius: 0px;
 }
@@ -31,11 +32,26 @@ select, option, input, button {
 button {
   margin-right: 4px;
   width: 96px;
+  color: white;
 }
 
 h1, h2 {
   color: #80cbc4;
   margin: 0;
+  text-align: center;
+  background-color: #121212;
+  position: sticky;
+}
+
+h2 {
+  padding-top: 3px;
+  top: 0px;
+}
+
+h1 {
+  padding-bottom: 3px;
+  margin-bottom: 7px;
+  top: 20px;
 }
 
 #account{
@@ -68,7 +84,7 @@ h1, h2 {
 
 .users span{
   display: inline-block;
-  width: 120px;
+  width: 155px;
   vertical-align: middle;
   box-sizing: border-box;
   color: gray;
@@ -83,8 +99,8 @@ h1, h2 {
 
 #status{
   padding: 2px;
-  opacity: 0.5;
   position: sticky;
   bottom: 5px;
-  background-color: red;
+  background-color: #900000;
+  color: gray;
 }

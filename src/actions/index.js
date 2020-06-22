@@ -21,6 +21,7 @@ export const GA_RECEIVE_ERROR = "GA_RECEIVE_ERROR";
 
 export const NETWORK_ONLINE= "NETWORK_ONLINE";
 export const NETWORK_OFFLINE= "NETWORK_OFFLINE";
+export const NETWORK_LASTFETCH= "NETWORK_LASTFETCH";
 
 export const SERVICE_LOAD_STATE = "SERVICE_LOAD_STATE";
 export const SERVICE_PERSIST_STATE = "SERVICE_PERSIST_STATE";
@@ -46,6 +47,7 @@ export const gaReceiveError = (error) => ({type: GA_RECEIVE_DATA, error});
 
 export const networkOnline = () => ({type: NETWORK_ONLINE});
 export const networkOffline = () => ({type: NETWORK_OFFLINE});
+export const networkLastFetch = (lastFetch) => ({type: NETWORK_LASTFETCH, lastFetch: lastFetch});
 
 export const serviceLoadState = () => ({type: SERVICE_LOAD_STATE});
 export const servicePersistState = () => ({type: SERVICE_PERSIST_STATE});

@@ -77,11 +77,17 @@ const gaData = (state = {usersNow: 0, usersToday: 0}, action) => {
           })
       );
     case actions.GA_RECEIVE_RT_DATA:
-         return loop(
+      const getRt = Cmd.run( 
+        (dispatch, viewId) => {timeoutRt = setTimeout(() => dispatch(actions.gaGetRtData(viewId)), rtRefreshMs)}, 
+        {args: [Cmd.dispatch, action.viewId]});
+
+      const networkFetch = Cmd.action(actions.networkLastFetch(new Date()));
+    
+      return loop(
           {...state, fetching: false, usersNow: action.data.usersNow, countriesAndUsersNow: action.data.countriesAndUsersNow},
-          Cmd.run( 
-            (dispatch, viewId) => {timeoutRt = setTimeout(() => dispatch(actions.gaGetRtData(viewId)), rtRefreshMs)}, 
-            {args: [Cmd.dispatch, action.viewId]}) 
+          Cmd.list([
+            getRt,
+            networkFetch])
         );
 
     case actions.GA_GET_DATA:

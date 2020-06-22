@@ -22,6 +22,8 @@ const network = (state = {online: navigator.onLine}, action) => {
         );
     case actions.NETWORK_OFFLINE:
       return {...state, online: false}
+    case actions.NETWORK_LASTFETCH:
+        return {...state, lastFetch: action.lastFetch}
     default:
         return state
   }

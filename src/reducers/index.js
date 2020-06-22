@@ -13,7 +13,8 @@
 //         availableAccounts: []
 //     },
 //     network : {
-//         online: true
+//         online: true,
+//           lastFetch: null
 //     },
 //     gaData: {
 //         usersNow: 0,
