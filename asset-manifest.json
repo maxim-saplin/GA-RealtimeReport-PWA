@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/GA-RealtimeReport-PWA/static/css/main.b296a069.chunk.css",
+    "main.css": "/GA-RealtimeReport-PWA/static/css/main.2da2f220.chunk.css",
     "main.js": "/GA-RealtimeReport-PWA/static/js/main.29efc2e6.chunk.js",
     "main.js.map": "/GA-RealtimeReport-PWA/static/js/main.29efc2e6.chunk.js.map",
     "runtime~main.js": "/GA-RealtimeReport-PWA/static/js/runtime~main.8158c519.js",
@@ -8,8 +8,8 @@
     "static/js/2.ed113929.chunk.js": "/GA-RealtimeReport-PWA/static/js/2.ed113929.chunk.js",
     "static/js/2.ed113929.chunk.js.map": "/GA-RealtimeReport-PWA/static/js/2.ed113929.chunk.js.map",
     "index.html": "/GA-RealtimeReport-PWA/index.html",
-    "precache-manifest.c6a03a082e5ba45e1b13b4d54cb0038f.js": "/GA-RealtimeReport-PWA/precache-manifest.c6a03a082e5ba45e1b13b4d54cb0038f.js",
+    "precache-manifest.ff5cc44a7234b6a7729eb8ed6994015c.js": "/GA-RealtimeReport-PWA/precache-manifest.ff5cc44a7234b6a7729eb8ed6994015c.js",
     "service-worker.js": "/GA-RealtimeReport-PWA/service-worker.js",
-    "static/css/main.b296a069.chunk.css.map": "/GA-RealtimeReport-PWA/static/css/main.b296a069.chunk.css.map"
+    "static/css/main.2da2f220.chunk.css.map": "/GA-RealtimeReport-PWA/static/css/main.2da2f220.chunk.css.map"
   }
 }
