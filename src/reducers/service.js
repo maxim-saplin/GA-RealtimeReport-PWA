@@ -8,7 +8,9 @@ const service = (state = {}, action) => {
       if (serializedState === null) {
         return state;
       }
-      return JSON.parse(serializedState);    
+      const s = JSON.parse(serializedState);    
+      if (s.network.lastFetch) s.network.lastFetch  = new Date(s.network.lastFetch);
+      return s;
     case actions.SERVICE_PERSIST_STATE:
       serializedState = JSON.stringify(state);
       localStorage.setItem('state', serializedState);
